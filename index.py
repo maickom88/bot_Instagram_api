@@ -45,6 +45,12 @@ def commentAllPost():
 
     return jsonify(quantComment)
 
+@app.route("/string", methods=["GET"])
+def resString():
+    string = request.args['str']
+    print(string)
+
+    return jsonify(string)
 #PARTE4
 if __name__ == '__main__':
   port = int(os.environ.get('PORT', 5000))
