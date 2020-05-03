@@ -19,7 +19,7 @@ def nao_entre_em_panico():
     if request.headers.get('Authorization') == '42':
         return jsonify({"42": "a resposta para a vida, o universo e tudo mais"})
     return jsonify({"message": "Não entre em pânico!"})
-    
+
 #PARTE3
 @app.route("/instaBotFollow", methods=["GET"])
 def followProfille():
@@ -60,5 +60,5 @@ def resString():
     return jsonify(string)
 #PARTE4
 if __name__ == '__main__':
-  port = int(os.environ.get('PORT', 5000))
-  app.run(host='127.0.0.1', port=port)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
