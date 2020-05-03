@@ -53,7 +53,7 @@ def commentAllPost():
 
     return jsonify(quantComment)
 
-@app.route("/name", methods=["POST, GET"])
+@app.route("/string", methods=["POST, GET"])
 def resString():
     if request.method == 'POST':
         stringName = request.form.get('name')
