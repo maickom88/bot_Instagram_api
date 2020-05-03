@@ -11,13 +11,7 @@ class InstagramBot:
         self.username = username
         self.password = password
         self.usernameProfile = usernameProfile
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--no-sandbox")
-        self.bot = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
+        self.bot =  webdriver.Chrome(executable_path=r'bot_insta/chromedriver.exe')
     #[PT]Script para logar
     #[EN]Script for login
     def login(self):
@@ -29,12 +23,12 @@ class InstagramBot:
 
         #[PT]Busca pelo inputs do email e senha
         #[EN]Search for email and password inputs
-        bot.find_element_by_name('username').send_keys(self.username)
-        bot.find_element_by_name('password').send_keys(self.password)
+        username = bot.find_element_by_name('username').send_keys(self.username)
+        password =  bot.find_element_by_name('password').send_keys(self.password)
 
         #[PT]Espero 1 minuto para pressionar o ENTER
         #[EN]I wait 1 minute to press ENTER
-        time.sleep(1)
+        time.sleep(3)
         bot.find_element_by_name('password').send_keys(Keys.RETURN)
 
         #[PT]Espero mais 3 minutos para entrar
@@ -54,7 +48,7 @@ class InstagramBot:
         #[PT]Pego o numero de seguidores atual
         #[EN]I take the current number of followers
         numberFollows = bot.find_elements_by_class_name('g47SY')
-        time.sleep(1)
+        time.sleep(2)
 
         #[PT]Transformo em texto e depois em inteiro
         #[EN]I convert it into text and then in int
@@ -69,12 +63,12 @@ class InstagramBot:
         #[PT]Pego o numero de botões que contém seguir
         #[EN]I take the number of buttons that contains follow
         follow = bot.find_elements_by_xpath("//button[contains(text(), 'Seguir')]")
-        time.sleep(1)
+        time.sleep(2)
 
         #[PT]Pego a janela onde contém os seguidores para depois rolar o scroll
         #[EN]I take the window containing the followers and then scroll down
         popup = bot.find_element_by_class_name('isgrP')
-        time.sleep(3)
+        time.sleep(2)
 
         #[PT]O codigo abaixo é para o robor não seguir todos e evitar bloqueios.
         #[EN]The code below is for the robot not to follow all and avoid blocking.
@@ -130,7 +124,7 @@ class InstagramBot:
 
     #[PT]Script para comentar em cadeia
     #[EN]String comment script
-    def commentPost(username, password, userInta, comment):
+    def commentPost(username, password, userInta, comment, limit):
         bot = webdriver.Chrome(executable_path=r'bot_insta/chromedriver.exe')
 
         #[PT]Navega pela página do Instagram

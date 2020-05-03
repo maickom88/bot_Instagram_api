@@ -10,6 +10,9 @@ import json
 import getpass
 import getpass_ak
 from bot_insta import bot_instagram
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
 #PARTE2
 
 app = Flask(__name__)
@@ -31,8 +34,6 @@ def followProfille():
     bot = bot_instagram.InstagramBot(username, password, userinsta)
     login = bot.login()
     numberClicks = bot.getProfile()
-    bot.close()
-    bot.quit()
     time.sleep(5)
     print(numberClicks)
 
@@ -52,12 +53,13 @@ def commentAllPost():
 
     return jsonify(quantComment)
 
-@app.route("/string", methods=["GET"])
+@app.route("/name", methods=["POST, GET"])
 def resString():
-    string = request.args['str']
-    print(string)
-
-    return jsonify(string)
+    if request.method == 'POST':
+        stringName = request.form.get('name')
+        stringSecondeName = request.form['secondName']
+        return stringName
+    return jsonify(stringName)
 #PARTE4
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
