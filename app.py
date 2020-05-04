@@ -31,7 +31,7 @@ def followProfille():
     bot = bot_instagram.InstagramBot(username, password, userinsta)
     login = bot.login()
     numberClicks = bot.getProfile()
-	res = [login, numberClicks]
+    res = [login, numberClicks]
     print(res)
 
     return jsonify(res)
