@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT -t 8000 -w 3 app:app
+web: gunicorn -b :$PORT, -t 8000 app:app
