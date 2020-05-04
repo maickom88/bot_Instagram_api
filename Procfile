@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT --workers=5 --worker-class gevent app:app
+web: gunicorn -b -t 8000 :$PORT app:app
