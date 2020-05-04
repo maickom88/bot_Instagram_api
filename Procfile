@@ -1,1 +1,1 @@
-web: gunicorn :$PORT app:app --timeout 800 --workers 4
+web: gunicorn -b :$PORT app:app --timeout 1200 --graceful-timeout 1200 --keep-alive 1200 --workers 3
