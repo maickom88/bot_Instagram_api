@@ -41,25 +41,32 @@ def followProfille():
 
 @app.route("/instaCommentAllFeed", methods=["GET"])
 def commentAllPost():
-    uusername = request.args['name']
+    username = request.args['name']
     password = request.args['password']
-    userInsta = request.args['userinsta']
+    userinsta = request.args['userinsta']
     comment = request.args['comment']
-    quantComment = bot.commentPost(username, password, userInsta, comment)
-    time.sleep(3)
-    bot.close()
-    bot.quit()
+    limit = request.args['limit']
+    limit = int(limit)
+    bot = bot_instagram.InstagramBot(username, password, userinsta)
+    quantComment = bot.commentPost(comment, limit)
     print(quantComment)
 
     return jsonify(quantComment)
 
-@app.route("/string", methods=["POST, GET"])
+@app.route("/string", methods=["POST"])
 def resString():
     if request.method == 'POST':
-        stringName = request.form.get('name')
-        stringSecondeName = request.form['secondName']
-        return stringName
-    return jsonify(stringName)
+        username = request.json['name']
+        password = request.json['password']
+        userinsta = request.json['userinsta']
+        comment = request.json['comment']
+        limit = request.json['limit']
+        limit = int(limit)
+        bot = bot_instagram.InstagramBot(username, password, userinsta)
+        quantComment = bot.commentPost(comment, limit)
+        print(quantComment)
+
+    return jsonify(quantComment)
 #PARTE4
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

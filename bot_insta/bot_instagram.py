@@ -130,9 +130,8 @@ class InstagramBot:
 
     #[PT]Script para comentar em cadeia
     #[EN]String comment script
-    def commentPost(username, password, userInta, comment, limit):
-        bot = webdriver.Chrome(executable_path=r'bot_insta/chromedriver.exe')
-
+    def commentPost(self, comment, limit):
+        bot = self.bot
         #[PT]Navega \pela página do Instagram
         #[EN]Browse the Instagram page
         bot.get('https://www.instagram.com/accounts/login/')
@@ -140,8 +139,8 @@ class InstagramBot:
 
         #[PT]Busca pelo inputs do email e senha
         #[EN]Search for email and password inputs
-        bot.find_element_by_name('username').send_keys(username)
-        bot.find_element_by_name('password').send_keys(password)
+        username = bot.find_element_by_name('username').send_keys(self.username)
+        password = bot.find_element_by_name('password').send_keys(self.password)
 
         #[PT]Espero 1 minuto para pressionar o ENTER
         #[EN]I wait 1 minute to press ENTER
@@ -154,7 +153,7 @@ class InstagramBot:
 
         #[PT]Entra na página do usuário
         #[EN]Enter user page
-        bot.get('https://instagram.com/' + userInta)
+        bot.get('https://instagram.com/' + self.usernameProfile)
         time.sleep(3)
 
         #[PT]Pega todas as fotos do feed
@@ -164,10 +163,11 @@ class InstagramBot:
 
         #[PT]Passeia pelas fotos do feed
         #[EN]Stroll through the photos in the feed
-        for photos in divPhotos:
+        for photos in range(limit):
+
             #[PT]Clica na foto
             #[EN]Click in photo
-            bot.execute_script('arguments[0].click()', photos)
+            bot.execute_script('arguments[0].click()', divPhotos[photos])
             time.sleep(2)
 
             #[PT]Clica no botão do gostei!
