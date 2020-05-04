@@ -1,2 +1,1 @@
-web: gunicorn -b :$PORT app:app -t INT, --timeout INT
-8000
+web: gunicorn -b :$PORT app:app --timeout 800
