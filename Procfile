@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT app:app --timeout 3000 --keep-alive 3000 --worker-class gevent --workers 5 --log-level debug 
+web: gunicorn -b :$PORT  --timeout 1200 --keep-alive 1200 --workers 3 --worker-class gevent  app:app
