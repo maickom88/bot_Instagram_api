@@ -59,7 +59,11 @@ class InstagramBot:
         #[PT]Transformo em texto e depois em inteiro
         #[EN]I convert it into text and then in int
         numberFollows = numberFollows[1].text
-        numberFollows = int(numberFollows.replace('.',''))
+        if '.' in numberFollows:
+            numberFollows = int(numberFollows.replace('.',''))
+        else:
+            numberFollows = int(numberFollows.replace(',',''))
+
 
         #[PT]Clico nos seguidores
         #[EN]Click in followes
