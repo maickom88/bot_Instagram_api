@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT app:app --worker-class gevent --log-level debug
+web: gunicorn -b :$PORT --workers=5 --worker-class gevent app:app
