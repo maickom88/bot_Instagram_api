@@ -11,12 +11,7 @@ class InstagramBot:
         self.username = username
         self.password = password
         self.usernameProfile = usernameProfile
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--no-sandbox")
-        self.bot = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+        self.bot =  webdriver.Chrome(executable_path=r'bot_insta/chromedriver.exe')
 
     #[PT]Script para logar
     #[EN]Script for login
@@ -25,7 +20,7 @@ class InstagramBot:
         #[PT]Navega pela página do Instagram
         #[EN]Browse the Instagram page
         bot.get('https://www.instagram.com/accounts/login/')
-        time.sleep(4)
+        time.sleep(3)
 
         #[PT]Busca pelo inputs do email e senha
         #[EN]Search for email and password inputs
@@ -34,7 +29,7 @@ class InstagramBot:
 
         #[PT]Espero 1 minuto para pressionar o ENTER
         #[EN]I wait 1 minute to press ENTER
-        time.sleep(3)
+        time.sleep(1)
         bot.find_element_by_name('password').send_keys(Keys.RETURN)
 
         #[PT]Espero mais 3 minutos para entrar
@@ -49,7 +44,7 @@ class InstagramBot:
         #[PT]Navega pela paginá do Instagram
         #[EN]Browse the Instagram page
         bot.get('https://instagram.com/' + self.usernameProfile)
-        time.sleep(4)
+        time.sleep(3)
 
         #[PT]Pego o numero de seguidores atual
         #[EN]I take the current number of followers
@@ -68,17 +63,17 @@ class InstagramBot:
         #[PT]Clico nos seguidores
         #[EN]Click in followes
         bot.find_element_by_xpath('//a[@href="/' + self.usernameProfile + '/followers/"]').click()
-        time.sleep(3)
+        time.sleep(2)
 
         #[PT]Pego o numero de botões que contém seguir
         #[EN]I take the number of buttons that contains follow
         follow = bot.find_elements_by_xpath("//button[contains(text(), 'Seguir')]")
-        time.sleep(3)
+        time.sleep(2)
 
         #[PT]Pego a janela onde contém os seguidores para depois rolar o scroll
         #[EN]I take the window containing the followers and then scroll down
         popup = bot.find_element_by_class_name('isgrP')
-        time.sleep(3)
+        time.sleep(2)
 
         #[PT]O codigo abaixo é para o robor não seguir todos e evitar bloqueios.
         #[EN]The code below is for the robot not to follow all and avoid blocking.
@@ -123,11 +118,9 @@ class InstagramBot:
             #[PT]Se o index chegar a quantidade de seguidores o laço para
             #[EN]If the index reaches the number of followers, the loop for
             index += len(follow)
-            time.sleep(1)
 
         bot.close()
         bot.quit()
-        time.sleep(1)
         #[PT]Retorna a quantidade de clicks
         #[EN]Returns the number of clicks
         return "Finalizado. O robo seguiu {}".format(quantClick)

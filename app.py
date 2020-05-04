@@ -29,15 +29,13 @@ def followProfille():
     username = request.args['name']
     password = request.args['password']
     userinsta = request.args['userinsta']
-    msg = "You passed {} args using query string. Your args: {}".format(len(request.args), [username, password, userinsta])
-    time.sleep(1)
     bot = bot_instagram.InstagramBot(username, password, userinsta)
     login = bot.login()
     numberClicks = bot.getProfile()
-    time.sleep(5)
-    print(numberClicks)
+	res = [login, numberClicks]
+    print(res)
 
-    return jsonify(numberClicks)
+    return jsonify(res)
 
 @app.route("/instaCommentAllFeed", methods=["GET"])
 def commentAllPost():
@@ -58,9 +56,9 @@ def resString():
     if request.method == 'POST':
         username = request.json['name']
         password = request.json['password']
-        userinsta = request.json['userinsta']
-        comment = request.json['comment']
-        limit = request.json['limit']
+        userinsta = request.args['userinsta']
+        comment = request.args['comment']
+        limit = request.args['limit']
         limit = int(limit)
         bot = bot_instagram.InstagramBot(username, password, userinsta)
         quantComment = bot.commentPost(comment, limit)
