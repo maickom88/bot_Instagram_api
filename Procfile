@@ -1,1 +1,1 @@
-web: gunicorn -b :$PORT app:app --timeout 1200 --graceful-timeout 1200 --keep-alive 1200 --workers 3
+web: gunicorn -b :$PORT app:app -timeout 300 --keep-alive 300 --log-level debug --workers 3
