@@ -33,7 +33,7 @@ def followProfille():
     numberClicks = bot.getProfile()
     print(numberClicks)
 
-    return jsonify(res)
+    return jsonify(numberClicks)
 
 @app.route("/instaCommentAllFeed", methods=["GET"])
 def commentAllPost():
