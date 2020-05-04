@@ -10,8 +10,7 @@ import json
 import getpass
 import getpass_ak
 from bot_insta import bot_instagram
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+
 
 #PARTE2
 
