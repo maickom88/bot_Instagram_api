@@ -9,11 +9,20 @@ import json
 import getpass
 import getpass_ak
 from bot_insta import bot_instagram
-
-
+from celery import Celery
+from multiprocessing import Process
 #PARTE2
+broker_url = 'amqp://guest@localhost'          # Broker URL for RabbitMQ task queue
 
 app = Flask(__name__)
+celery = Celery(app.name, broker=broker_url)
+
+@celery.task(bind=True)
+def bot(self, username, password, userinsta ):
+    bot = bot_instagram.InstagramBot(username, password, userinsta)
+    numberClicks = bot.getProfile()
+    return numberClicks
+
 
 @app.route('/')
 def nao_entre_em_panico():
@@ -23,14 +32,29 @@ def nao_entre_em_panico():
 
 #PARTE3
 
-@app.route("/instaBot2", methods=["POST"])
+@app.route("/instaBot3", methods=["GET"])
+def followProfille3():
+    username = request.args['name']
+    password = request.args['password']
+    userinsta = request.args['userinsta']
+    heavy_process = Process(  # Create a daemonic process with heavy "my_func"
+        target= botP(username, password, userinsta),
+        daemon=True
+    )
+    heavy_process.start()
+    numberClicks = 'ok'
+
+    return jsonify(numberClicks)
+@app.route("/instaBot2", methods=["GET"])
 def followProfille2():
-    username = request.json['name']
-    password = request.json['password']
-    userinsta = request.json['userinsta']
-    bot = bot_instagram.InstagramBot(username, password, userinsta)
-    numberClicks = bot.getProfile()
+    username = request.args['name']
+    password = request.args['password']
+    userinsta = request.args['userinsta']
+    numberClicks = bot(username, password, userinsta)
     print(numberClicks)
+
+    return jsonify(numberClicks)
+
 
 @app.route("/instaBot", methods=["POST"])
 def followProfille1():
@@ -83,6 +107,12 @@ def resString():
         print(quantComment)
 
     return jsonify(quantComment)
+
+
+def botP(username, password, userinsta):
+    bot = bot_instagram.InstagramBot(username, password, userinsta)
+    numberClicks = bot.getProfile()
+
 #PARTE4
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
