@@ -67,7 +67,11 @@ class InstagramBot:
 
         #[PT]Pego o numero de botões que contém seguir
         #[EN]I take the number of buttons that contains follow
-        follow = bot.find_elements_by_xpath("//button[contains(text(), 'Seguir')]")
+        try:
+            follow = bot.find_elements_by_xpath("//button[contains(text(), 'Seguir')]")
+        except:
+            follow = bot.find_elements_by_xpath("//button[contains(text(), 'Follow')]")
+
         time.sleep(2)
 
         #[PT]Pego a janela onde contém os seguidores para depois rolar o scroll
