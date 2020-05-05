@@ -1,0 +1,13 @@
+Flask==1.1.2
+Flask-Jsonpify==1.5.0
+Flask-RESTful==0.3.8
+Flask-SQLAlchemy==2.4.1
+itsdangerous==1.1.0
+Jinja2==2.11.2
+requests2==2.16.0
+selenium==3.141.0
+Werkzeug==1.0.1
+gunicorn==20.0.4
+beautifulsoup4==4.9.0
+click==7.1.1
+gevent==20.5.0
