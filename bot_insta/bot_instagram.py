@@ -101,7 +101,7 @@ class InstagramBot:
 
             #[PT]Pega todos os botões que contém o nome seguir novamente
             #[EN]Get all the buttons that contain the name follow again
-            followIn = bot.find_elements_by_xpath("//button[contains(text(), 'Seguir')]")
+            followIn = bot.find_elements_by_xpath("//button[contains(text(), 'Follow')]")
             time.sleep(2)
 
             #[PT]Se houver alguém para seguir ele entra no "for"
@@ -115,7 +115,7 @@ class InstagramBot:
                     quantClick += 1
             #[PT]"follow" recene mais novos botões ao rolar o caixa
             #[EN]"follow" receive more new buttons when rolling the cashier
-            follow += bot.find_elements_by_xpath("//button[contains(text(), 'Seguir')]")
+            follow += bot.find_elements_by_xpath("//button[contains(text(), 'Follow')]")
 
             #[PT]Se o index chegar a quantidade de seguidores o laço para
             #[EN]If the index reaches the number of followers, the loop for
