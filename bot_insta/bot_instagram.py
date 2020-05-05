@@ -1,11 +1,11 @@
 #[PT]Importes necessários!
 #[EN]Imports required!
+import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 import getpass
 import getpass_ak
-import os
 
 class InstagramBot:
     def __init__(self, username, password, usernameProfile):

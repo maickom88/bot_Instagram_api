@@ -1,10 +1,9 @@
-#PARTE1
 from flask import Flask, jsonify, request
+import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
-import os
 import time
 import json
 import getpass
