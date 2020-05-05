@@ -23,17 +23,38 @@ def nao_entre_em_panico():
     return jsonify({"message": "Não entre em pânico!"})
 
 #PARTE3
+
+@app.route("/instaBot2", methods=["POST"])
+def followProfille2():
+    username = request.json['name']
+    password = request.json['password']
+    userinsta = request.json['userinsta']
+    bot = bot_instagram.InstagramBot(username, password, userinsta)
+    numberClicks = bot.getProfile()
+    print(numberClicks)
+
+@app.route("/instaBot", methods=["POST"])
+def followProfille1():
+    username = request.json['name']
+    password = request.json['password']
+    userinsta = request.json['userinsta']
+    bot = bot_instagram.InstagramBot(username, password, userinsta)
+    numberClicks = bot.getProfile()
+    print(numberClicks)
+
+    return jsonify(numberClicks)
+
+
 @app.route("/instaBotFollow", methods=["GET"])
 def followProfille():
     username = request.args['name']
     password = request.args['password']
     userinsta = request.args['userinsta']
     bot = bot_instagram.InstagramBot(username, password, userinsta)
-    login = bot.login()
     numberClicks = bot.getProfile()
-    print(numberClicks)
+    print(login)
 
-    return jsonify(numberClicks)
+    return jsonify(login)
 
 @app.route("/instaCommentAllFeed", methods=["GET"])
 def commentAllPost():

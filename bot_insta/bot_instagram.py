@@ -6,6 +6,7 @@ import time
 import getpass
 import getpass_ak
 import os
+
 class InstagramBot:
     def __init__(self, username, password, usernameProfile):
         self.username = username
@@ -18,11 +19,11 @@ class InstagramBot:
         chrome_options.add_argument("--no-sandbox")
         self.bot = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-    #[PT]Script para logar
-    #[EN]Script for login
-    def login(self):
+    #[PT]Script para pegar Instagram e seguir referências
+    #[EN]Script to get Instagram and follow reference
+    def getProfile(self):
         bot = self.bot
-        #[PT]Navega pela página do Instagram
+        #[PT]Navega \pela página do Instagram
         #[EN]Browse the Instagram page
         bot.get('https://www.instagram.com/accounts/login/')
         time.sleep(3)
@@ -30,7 +31,7 @@ class InstagramBot:
         #[PT]Busca pelo inputs do email e senha
         #[EN]Search for email and password inputs
         username = bot.find_element_by_name('username').send_keys(self.username)
-        password =  bot.find_element_by_name('password').send_keys(self.password)
+        password = bot.find_element_by_name('password').send_keys(self.password)
 
         #[PT]Espero 1 minuto para pressionar o ENTER
         #[EN]I wait 1 minute to press ENTER
@@ -40,12 +41,6 @@ class InstagramBot:
         #[PT]Espero mais 3 minutos para entrar
         #[EN]I wait more 3 minute to for login
         time.sleep(3)
-        return 'Logado com sucesso'
-
-    #[PT]Script para pegar Instagram e seguir referências
-    #[EN]Script to get Instagram and follow reference
-    def getProfile(self):
-        bot = self.bot
         #[PT]Navega pela paginá do Instagram
         #[EN]Browse the Instagram page
         bot.get('https://instagram.com/' + self.usernameProfile)
@@ -68,7 +63,7 @@ class InstagramBot:
         #[PT]Clico nos seguidores
         #[EN]Click in followes
         bot.find_element_by_xpath('//a[@href="/' + self.usernameProfile + '/followers/"]').click()
-        time.sleep(2)
+        time.sleep(3)
 
         #[PT]Pego o numero de botões que contém seguir
         #[EN]I take the number of buttons that contains follow
@@ -123,8 +118,6 @@ class InstagramBot:
             #[PT]Se o index chegar a quantidade de seguidores o laço para
             #[EN]If the index reaches the number of followers, the loop for
             index += len(follow)
-
-        bot.close()
         bot.quit()
         #[PT]Retorna a quantidade de clicks
         #[EN]Returns the number of clicks
@@ -195,7 +188,6 @@ class InstagramBot:
 
             quantComment+=1
         bot.close()
-        bot.quit()
         time.sleep(0.5)
         #[PT]Retorno a quantidade de comentários eventualmente feitos
         #[EN]Return the amount of comments eventually made
